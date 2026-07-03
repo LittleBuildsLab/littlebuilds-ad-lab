@@ -38,8 +38,21 @@ This snapshot was created before installing any server roles. It provides a clea
 
 ## Screenshots
 
+### Clean install and renamed server
+
+This screenshot shows the Windows Server 2022 VM after installation, with the server renamed to `LB-SRV-DC01`. The server is still in the default `WORKGROUP`, which confirms this was captured before configuring Active Directory Domain Services.
+
 ![Clean install and renamed server](../screenshots/01%20-%20Clean%20Install%20-%20Renamed%20Server.png)
+
+### VirtualBox VM configuration
+
+This screenshot documents the VM hardware configuration used for the lab, including 4096 MB of RAM, 2 CPUs, an 80 GB virtual disk, NAT networking, and 128 MB of video memory.
 
 ![VirtualBox VM configuration](../screenshots/02%20-%20VirtualBox%20VM%20Configuration.png)
 
+### Baseline snapshot created
+
+This screenshot shows the baseline VirtualBox snapshot created after the clean Windows Server installation and initial configuration. This snapshot provides a rollback point before installing server roles or configuring Active Directory.
+
 ![Baseline snapshot created](../screenshots/03%20-%20Baseline%20Snapshot%20Created.png)
+
