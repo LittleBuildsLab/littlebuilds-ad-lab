@@ -45,8 +45,9 @@ Ethernet 2 is configured for the internal lab network:
 - Active Directory Domain Services
 - Domain controller setup
 - DNS role installation
+- Active Directory Users and Computers
+- Organizational Unit planning and creation
 - User and group administration
-- Organizational Unit planning
 - Shared folder permissions
 - Group Policy basics
 - DNS fundamentals
@@ -60,7 +61,7 @@ Ethernet 2 is configured for the internal lab network:
 | Phase 1 | Repository setup and project documentation | ✅ Complete |
 | Phase 2 | Windows Server VM installation and baseline setup | ✅ Complete |
 | Phase 3 | Domain controller setup | ✅ Complete |
-| Phase 4 | Active Directory structure | ⏳ Planned |
+| Phase 4 | Active Directory structure | ✅ Complete |
 | Phase 5 | Users, groups, and OUs | ⏳ Planned |
 | Phase 6 | Shared folders and permissions | ⏳ Planned |
 | Phase 7 | Group Policy testing | ⏳ Planned |
@@ -69,9 +70,8 @@ Ethernet 2 is configured for the internal lab network:
 
 ## 🔍 Planned Focus Areas
 
-- Active Directory structure design
 - Users and groups
-- Organizational Units
+- Security groups and distribution groups
 - Shared folders and permissions
 - Group Policy
 - DNS basics
@@ -93,10 +93,12 @@ Current screenshots include:
 - AD DS and DNS installation confirmation
 - Domain controller Local Server details
 - Domain controller snapshot creation
+- Active Directory OU structure
+- Branch OU structure
+- Active Directory structure snapshot creation
 
 Planned screenshots include:
 
-- Organizational Units
 - User and group creation
 - Shared folder permission testing
 - Group Policy results
@@ -108,10 +110,10 @@ Current documentation includes:
 
 - `server-setup/windows-server-vm-setup.md`
 - `active-directory/domain-controller-setup.md`
+- `active-directory/active-directory-structure.md`
 
 Future documentation will include:
 
-- Active Directory structure planning
 - User and group creation
 - Shared folder permissions
 - Group Policy testing
@@ -132,16 +134,20 @@ Current lessons learned:
 - DNS is a major part of Active Directory and is installed with the domain controller role in this lab.
 - VirtualBox snapshots are useful rollback points before and after major configuration changes.
 - The first reboot after promoting a server to a domain controller can take time and may appear stuck.
+- Custom OUs keep lab objects organized and separate from the default Active Directory containers.
+- Creating the OU structure before users and groups makes the environment easier to manage.
 - Clear screenshots and notes make the project easier to understand later.
 
 ## 🚧 Current Status
 
-Phase 1, Phase 2, and Phase 3 are complete.
+Phase 1, Phase 2, Phase 3, and Phase 4 are complete.
 
 The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
 
 Active Directory Domain Services and DNS have been installed. The server has been promoted to a domain controller for the new domain `littlebuilds.local`, with the NetBIOS name `LITTLEBUILDS`.
 
-A Phase 3 snapshot has been created after the domain controller setup.
+A custom Active Directory OU structure has been created under the top-level `LittleBuilds` OU. The structure includes OUs for branches, departments, users, groups, computers, and resources.
 
-Next step: plan the Active Directory structure, including branches, departments, organizational units, users, and groups.
+A Phase 4 snapshot has been created after completing the Active Directory structure.
+
+Next step: create users and groups inside the LittleBuilds Active Directory structure.
