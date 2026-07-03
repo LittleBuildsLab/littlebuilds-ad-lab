@@ -35,3 +35,11 @@ Snapshot created after clean installation and initial configuration:
 ## Notes
 
 This snapshot was created before installing any server roles. It provides a clean rollback point before configuring Active Directory Domain Services.
+
+## Screenshots
+
+![Clean install and renamed server](../screenshots/01%20-%20Clean%20Install%20-%20Renamed%20Server.png)
+
+![VirtualBox VM configuration](../screenshots/02%20-%20VirtualBox%20VM%20Configuration.png)
+
+![Baseline snapshot created](../screenshots/03%20-%20Baseline%20Snapshot%20Created.png)
