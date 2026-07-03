@@ -75,6 +75,32 @@ Snapshot created after the domain controller setup:
 
 `02 - Domain Controller Created`
 
+## Screenshots
+
+### Domain login screen
+
+This screenshot confirms that the server is now using the new Active Directory domain login format, showing `LITTLEBUILDS\Administrator`.
+
+![Domain login screen](../screenshots/04%20-%20Domain%20Login%20Screen.png)
+
+### AD DS and DNS installed
+
+This screenshot shows Server Manager after the domain controller promotion. The left menu confirms that both AD DS and DNS roles are installed.
+
+![AD DS and DNS installed](../screenshots/05%20-%20AD%20DS%20and%20DNS%20Installed.png)
+
+### Domain controller local server details
+
+This screenshot confirms the server name, domain membership, and static internal IP address used for the LittleBuilds Active Directory lab.
+
+![Domain controller local server details](../screenshots/06%20-%20Domain%20Controller%20Local%20Server.png)
+
+### Domain controller snapshot created
+
+This screenshot shows the VirtualBox snapshot created after the domain controller setup was completed.
+
+![Domain controller snapshot created](../screenshots/07%20-%20Domain%20Controller%20Snapshot%20Created.png)
+
 ## Notes
 
 The reboot after domain controller promotion appeared to hang on the Restarting screen. After waiting, a normal ACPI shutdown did not respond, so the VM was powered off and restarted. On restart, Windows successfully continued applying computer settings and booted to the new domain login screen.
