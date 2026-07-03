@@ -6,7 +6,7 @@ A hands-on Windows Server Active Directory homelab designed to practice real-wor
 
 The goal of this lab is to build a small business-style Windows domain using Windows Server and a Windows client VM.
 
-This project will document the setup process, configuration choices, screenshots, troubleshooting notes, and lessons learned while building a practical Active Directory environment.
+This project documents the setup process, configuration choices, screenshots, troubleshooting notes, and lessons learned while building a practical Active Directory environment.
 
 ## 🖥️ Lab Environment
 
@@ -17,16 +17,34 @@ This project will document the setup process, configuration choices, screenshots
 | Server Name | LB-SRV-DC01 |
 | Server OS | Windows Server 2022 Standard Evaluation |
 | Install Type | Desktop Experience |
+| Domain Name | littlebuilds.local |
+| NetBIOS Domain Name | LITTLEBUILDS |
+| Domain Controller | LB-SRV-DC01 |
 | Client OS | Windows 11 planned |
-| Domain Concept | LittleBuildsLab |
 | Lab Type | Small business-style Active Directory environment |
+
+## 🌐 Network Configuration
+
+| Adapter | Purpose | Configuration |
+|---|---|---|
+| Ethernet | Internet access | NAT, DHCP |
+| Ethernet 2 | Internal Active Directory lab network | Static IP |
+
+Ethernet 2 is configured for the internal lab network:
+
+- IP address: `10.10.10.10`
+- Subnet mask: `255.255.255.0`
+- Preferred DNS server: `10.10.10.10`
+- Internal network name: `LittleBuildsLabNet`
 
 ## 🛠️ Skills Practiced
 
 - Windows Server installation and configuration
 - Virtual machine setup and snapshot management
+- Static IP configuration
 - Active Directory Domain Services
 - Domain controller setup
+- DNS role installation
 - User and group administration
 - Organizational Unit planning
 - Shared folder permissions
@@ -41,7 +59,7 @@ This project will document the setup process, configuration choices, screenshots
 |---|---|---|
 | Phase 1 | Repository setup and project documentation | ✅ Complete |
 | Phase 2 | Windows Server VM installation and baseline setup | ✅ Complete |
-| Phase 3 | Domain controller setup | ⏳ Planned |
+| Phase 3 | Domain controller setup | ✅ Complete |
 | Phase 4 | Active Directory structure | ⏳ Planned |
 | Phase 5 | Users, groups, and OUs | ⏳ Planned |
 | Phase 6 | Shared folders and permissions | ⏳ Planned |
@@ -51,7 +69,7 @@ This project will document the setup process, configuration choices, screenshots
 
 ## 🔍 Planned Focus Areas
 
-- Active Directory Domain Services
+- Active Directory structure design
 - Users and groups
 - Organizational Units
 - Shared folders and permissions
@@ -63,7 +81,7 @@ This project will document the setup process, configuration choices, screenshots
 
 ## 📸 Screenshots
 
-Screenshots will be added throughout the project to document each major configuration step.
+Screenshots are being added throughout the project to document each major configuration step.
 
 Current screenshots include:
 
@@ -71,16 +89,34 @@ Current screenshots include:
 - Server Manager configuration
 - VirtualBox VM configuration
 - Baseline snapshot creation
+- Domain login screen
+- AD DS and DNS installation confirmation
+- Domain controller Local Server details
+- Domain controller snapshot creation
 
 Planned screenshots include:
 
-- Active Directory Domain Services installation
-- Domain controller promotion
 - Organizational Units
 - User and group creation
 - Shared folder permission testing
 - Group Policy results
 - Windows 11 client domain join
+
+## 📁 Documentation
+
+Current documentation includes:
+
+- `server-setup/windows-server-vm-setup.md`
+- `active-directory/domain-controller-setup.md`
+
+Future documentation will include:
+
+- Active Directory structure planning
+- User and group creation
+- Shared folder permissions
+- Group Policy testing
+- Windows client domain join
+- Troubleshooting notes
 
 ## 💡 Why I Built This
 
@@ -90,8 +126,22 @@ I am building this lab to strengthen my practical IT skills and create a documen
 
 This section will be updated as the lab progresses. I will document configuration choices, troubleshooting steps, mistakes, fixes, and key takeaways from each phase.
 
+Current lessons learned:
+
+- A domain controller should use a static IP address.
+- DNS is a major part of Active Directory and is installed with the domain controller role in this lab.
+- VirtualBox snapshots are useful rollback points before and after major configuration changes.
+- The first reboot after promoting a server to a domain controller can take time and may appear stuck.
+- Clear screenshots and notes make the project easier to understand later.
+
 ## 🚧 Current Status
 
-Phase 1 and Phase 2 are complete. The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
+Phase 1, Phase 2, and Phase 3 are complete.
 
-Next step: install Active Directory Domain Services and promote the server to a domain controller.
+The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
+
+Active Directory Domain Services and DNS have been installed. The server has been promoted to a domain controller for the new domain `littlebuilds.local`, with the NetBIOS name `LITTLEBUILDS`.
+
+A Phase 3 snapshot has been created after the domain controller setup.
+
+Next step: plan the Active Directory structure, including branches, departments, organizational units, users, and groups.
