@@ -83,6 +83,46 @@ The `Resources` OU contains:
 - `Shared-Folders`
 - `Printers`
 
+```
+
+## Configuration Notes
+
+- The OU structure was created manually using Active Directory Users and Computers.
+- Default Active Directory containers such as `Users` and `Computers` were left unchanged.
+- Lab objects will be created inside the custom `LittleBuilds` OU structure.
+- The option to protect containers from accidental deletion was left enabled when creating OUs.
+- The structure was created before adding users, groups, computers, shared folders, or Group Policy Objects.
+
+## Screenshots
+
+### Active Directory OU structure created
+
+This screenshot shows the custom LittleBuilds OU structure created under the `littlebuilds.local` domain. The structure includes OUs for branches, departments, users, groups, computers, and resources.
+
+![Active Directory OU structure created](../screenshots/08%20-%20Active%20Directory%20OU%20Structure%20Created.png)
+
+### Branch OU structure
+
+This screenshot shows the dog-themed branch OUs created under the `Branches` OU, including Ozzy, Monty, Chewy, Penny, Daisy, PorkChop, and Ted.
+
+![Branch OU structure](../screenshots/09%20-%20Branch%20OU%20Structure.png)
+
+### Active Directory structure snapshot created
+
+This screenshot shows the VirtualBox snapshot created after completing the Active Directory OU structure.
+
+![Active Directory structure snapshot created](../screenshots/10%20-%20Active%20Directory%20Structure%20Snapshot%20Created.png)
+
+## Snapshot
+
+Snapshot created after completing the Active Directory structure:
+
+`03 - Active Directory Structure Created`
+
+## Notes
+
+This snapshot was created before adding users, groups, computers, shared folders, or Group Policy Objects.
+
 ## OU Structure
 
 ```text
@@ -116,3 +156,4 @@ littlebuilds.local
     └── Resources
         ├── Shared-Folders
         └── Printers
+
