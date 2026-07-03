@@ -48,6 +48,8 @@ Ethernet 2 is configured for the internal lab network:
 - Active Directory Users and Computers
 - Organizational Unit planning and creation
 - User and group administration
+- Security group planning
+- Group membership management
 - Shared folder permissions
 - Group Policy basics
 - DNS fundamentals
@@ -62,7 +64,7 @@ Ethernet 2 is configured for the internal lab network:
 | Phase 2 | Windows Server VM installation and baseline setup | ✅ Complete |
 | Phase 3 | Domain controller setup | ✅ Complete |
 | Phase 4 | Active Directory structure | ✅ Complete |
-| Phase 5 | Users, groups, and OUs | ⏳ Planned |
+| Phase 5 | Users, groups, and OUs | ✅ Complete |
 | Phase 6 | Shared folders and permissions | ⏳ Planned |
 | Phase 7 | Group Policy testing | ⏳ Planned |
 | Phase 8 | Windows client domain join | ⏳ Planned |
@@ -70,8 +72,6 @@ Ethernet 2 is configured for the internal lab network:
 
 ## 🔍 Planned Focus Areas
 
-- Users and groups
-- Security groups and distribution groups
 - Shared folders and permissions
 - Group Policy
 - DNS basics
@@ -96,10 +96,14 @@ Current screenshots include:
 - Active Directory OU structure
 - Branch OU structure
 - Active Directory structure snapshot creation
+- Admin user creation
+- Standard user creation
+- Security group creation
+- User group membership example
+- Users and groups snapshot creation
 
 Planned screenshots include:
 
-- User and group creation
 - Shared folder permission testing
 - Group Policy results
 - Windows 11 client domain join
@@ -111,10 +115,10 @@ Current documentation includes:
 - `server-setup/windows-server-vm-setup.md`
 - `active-directory/domain-controller-setup.md`
 - `active-directory/active-directory-structure.md`
+- `active-directory/users-and-groups.md`
 
 Future documentation will include:
 
-- User and group creation
 - Shared folder permissions
 - Group Policy testing
 - Windows client domain join
@@ -136,11 +140,15 @@ Current lessons learned:
 - The first reboot after promoting a server to a domain controller can take time and may appear stuck.
 - Custom OUs keep lab objects organized and separate from the default Active Directory containers.
 - Creating the OU structure before users and groups makes the environment easier to manage.
+- Admin users, standard users, and service accounts should be separated into appropriate OUs.
+- Security groups make permissions easier to manage than assigning access directly to individual users.
+- Group memberships can be based on department, role, or access needs.
+- Shared-folder access groups can be created before the folders exist.
 - Clear screenshots and notes make the project easier to understand later.
 
 ## 🚧 Current Status
 
-Phase 1, Phase 2, Phase 3, and Phase 4 are complete.
+Phase 1, Phase 2, Phase 3, Phase 4, and Phase 5 are complete.
 
 The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
 
@@ -148,6 +156,8 @@ Active Directory Domain Services and DNS have been installed. The server has bee
 
 A custom Active Directory OU structure has been created under the top-level `LittleBuilds` OU. The structure includes OUs for branches, departments, users, groups, computers, and resources.
 
-A Phase 4 snapshot has been created after completing the Active Directory structure.
+Sample users, a service account, security groups, and group memberships have been created manually in Active Directory Users and Computers. Janine Admin represents Head Office, and each standard dog account represents a LittleBuilds branch lead.
 
-Next step: create users and groups inside the LittleBuilds Active Directory structure.
+A Phase 5 snapshot has been created after completing user and group creation.
+
+Next step: Phase 6 - Shared folders and permissions.
