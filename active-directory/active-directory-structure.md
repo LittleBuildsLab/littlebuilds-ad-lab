@@ -83,8 +83,41 @@ The `Resources` OU contains:
 - `Shared-Folders`
 - `Printers`
 
-```
+## OU Structure
 
+```text
+littlebuilds.local
+└── LittleBuilds
+    ├── Branches
+    │   ├── Ozzy-Branch
+    │   ├── Monty-Branch
+    │   ├── Chewy-Branch
+    │   ├── Penny-Branch
+    │   ├── Daisy-Branch
+    │   ├── PorkChop-Branch
+    │   └── Ted-Branch
+    ├── Departments
+    │   ├── Administration
+    │   ├── Finance
+    │   ├── HR
+    │   ├── IT
+    │   ├── Operations
+    │   └── Sales
+    ├── Users
+    │   ├── Admin-Users
+    │   ├── Standard-Users
+    │   └── Service-Accounts
+    ├── Groups
+    │   ├── Security-Groups
+    │   └── Distribution-Groups
+    ├── Computers
+    │   ├── Workstations
+    │   └── Servers
+    └── Resources
+        ├── Shared-Folders
+        └── Printers
+
+```
 ## Configuration Notes
 
 - The OU structure was created manually using Active Directory Users and Computers.
@@ -122,38 +155,3 @@ Snapshot created after completing the Active Directory structure:
 ## Notes
 
 This snapshot was created before adding users, groups, computers, shared folders, or Group Policy Objects.
-
-## OU Structure
-
-```text
-littlebuilds.local
-└── LittleBuilds
-    ├── Branches
-    │   ├── Ozzy-Branch
-    │   ├── Monty-Branch
-    │   ├── Chewy-Branch
-    │   ├── Penny-Branch
-    │   ├── Daisy-Branch
-    │   ├── PorkChop-Branch
-    │   └── Ted-Branch
-    ├── Departments
-    │   ├── Administration
-    │   ├── Finance
-    │   ├── HR
-    │   ├── IT
-    │   ├── Operations
-    │   └── Sales
-    ├── Users
-    │   ├── Admin-Users
-    │   ├── Standard-Users
-    │   └── Service-Accounts
-    ├── Groups
-    │   ├── Security-Groups
-    │   └── Distribution-Groups
-    ├── Computers
-    │   ├── Workstations
-    │   └── Servers
-    └── Resources
-        ├── Shared-Folders
-        └── Printers
-
