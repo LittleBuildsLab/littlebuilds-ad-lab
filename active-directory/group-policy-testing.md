@@ -22,6 +22,7 @@ The legal notice GPO was fully tested on the domain controller. The Control Pane
 - Internal network name: `LittleBuildsLabNet`
 - Server IP address: `10.10.10.10`
 - Preferred DNS: `10.10.10.10`
+- Current VirtualBox snapshot: `06 - Group Policy Testing Complete`
 
 ## Group Policy Concepts Practiced
 
@@ -69,6 +70,10 @@ Examples:
 - Windows firewall settings
 - Logon/legal notice settings
 
+Think of Computer Configuration as:
+
+**This setting follows the machine.**
+
 ### User Configuration
 
 User Configuration applies to the user account.
@@ -80,6 +85,10 @@ Examples:
 - Control Panel restrictions
 - Start menu restrictions
 - Logon scripts
+
+Think of User Configuration as:
+
+**This setting follows the person.**
 
 ## GPO 1 - Legal Notice Test
 
@@ -215,18 +224,55 @@ For this phase:
 
 ## Screenshots
 
-The following screenshots were captured for this phase:
+The following screenshots were captured during Phase 7 to document the Group Policy configuration, testing, and final snapshot.
 
-| Screenshot | Description |
-|---|---|
-| `26 - Legal Notice GPO Linked to Domain Controllers.png` | Shows the legal notice GPO linked to the Domain Controllers OU |
-| `27 - Group Policy Update Completed.png` | Shows `gpupdate /force` completing successfully |
-| `28 - Group Policy Result Shows Legal Notice GPO.png` | Shows the legal notice GPO listed under applied computer policies |
-| `29 - Legal Notice Displayed at Sign-In.png` | Shows the legal notice appearing before sign-in |
-| `30 - Legal Notice GPO Settings Configured.png` | Shows the configured legal notice settings |
-| `31 - Control Panel Restriction GPO Linked to Standard Users.png` | Shows the Control Panel restriction GPO linked to Standard-Users |
-| `32 - Control Panel Restriction GPO Settings Configured.png` | Shows the Control Panel restriction setting enabled |
-| `33 - Group Policy Testing Snapshot Created.png` | Shows the Phase 7 VirtualBox snapshot |
+### Screenshot 26 - Legal Notice GPO Linked to Domain Controllers
+
+This screenshot shows the `LittleBuilds - Legal Notice Test` GPO linked to the `Domain Controllers` OU.
+
+![Legal Notice GPO Linked to Domain Controllers](../screenshots/26%20-%20Legal%20Notice%20GPO%20Linked%20to%20Domain%20Controllers.png)
+
+### Screenshot 27 - Group Policy Update Completed
+
+This screenshot shows `gpupdate /force` completing successfully.
+
+![Group Policy Update Completed](../screenshots/27%20-%20Group%20Policy%20Update%20Completed.png)
+
+### Screenshot 28 - Group Policy Result Shows Legal Notice GPO
+
+This screenshot shows the `LittleBuilds - Legal Notice Test` GPO listed under applied computer policies.
+
+![Group Policy Result Shows Legal Notice GPO](../screenshots/28%20-%20Group%20Policy%20Result%20Shows%20Legal%20Notice%20GPO.png)
+
+### Screenshot 29 - Legal Notice Displayed at Sign-In
+
+This screenshot shows the legal notice appearing before sign-in.
+
+![Legal Notice Displayed at Sign-In](../screenshots/29%20-%20Legal%20Notice%20Displayed%20at%20Sign-In.png)
+
+### Screenshot 30 - Legal Notice GPO Settings Configured
+
+This screenshot shows the configured legal notice settings inside the GPO settings report.
+
+![Legal Notice GPO Settings Configured](../screenshots/30%20-%20Legal%20Notice%20GPO%20Settings%20Configured.png)
+
+### Screenshot 31 - Control Panel Restriction GPO Linked to Standard Users
+
+This screenshot shows the `LittleBuilds - Control Panel Restriction Test` GPO linked to the `Standard-Users` OU.
+
+![Control Panel Restriction GPO Linked to Standard Users](../screenshots/31%20-%20Control%20Panel%20Restriction%20GPO%20Linked%20to%20Standard%20Users.png)
+
+### Screenshot 32 - Control Panel Restriction GPO Settings Configured
+
+This screenshot shows the Control Panel restriction setting enabled.
+
+![Control Panel Restriction GPO Settings Configured](../screenshots/32%20-%20Control%20Panel%20Restriction%20GPO%20Settings%20Configured.png)
+
+### Screenshot 33 - Group Policy Testing Snapshot Created
+
+This screenshot shows the Phase 7 VirtualBox snapshot created after Group Policy testing was completed.
+
+![Group Policy Testing Snapshot Created](../screenshots/33%20-%20Group%20Policy%20Testing%20Snapshot%20Created.png)
 
 ## VirtualBox Snapshot
 
@@ -258,6 +304,23 @@ Completed tasks:
 - Linked the Control Panel restriction GPO to the Standard-Users OU
 - Documented Group Policy settings with screenshots
 - Created a VirtualBox snapshot after completion
+
+## Lessons Learned
+
+Key takeaways from this phase:
+
+- Group Policy Objects can be created before they are linked.
+- A GPO does not apply just because it exists.
+- A GPO must be linked to the correct domain or OU before it can apply.
+- Computer Configuration settings apply to computers.
+- User Configuration settings apply to user accounts.
+- GPO targeting depends on where the GPO is linked.
+- The legal notice GPO was linked to Domain Controllers because the domain controller is currently the only domain-joined computer available for testing.
+- The Control Panel restriction GPO was linked to Standard-Users because it is a user-based policy.
+- `gpupdate /force` refreshes Group Policy manually.
+- `gpresult` helps confirm which policies actually applied.
+- A Windows 11 client VM is needed to fully test user-based policies in a realistic workstation environment.
+- Accurate server time matters because Active Directory and domain authentication depend on time being correct.
 
 ## Next Step
 
