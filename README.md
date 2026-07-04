@@ -53,8 +53,11 @@ Ethernet 2 is configured for the internal lab network:
 - User and group administration
 - Security group planning
 - Group membership management
-- Shared folder permissions
+- Shared folder creation
+- Share permissions
+- NTFS permissions
 - Share permissions vs NTFS permissions
+- Group-based access control
 - Group Policy basics
 - DNS fundamentals
 - Windows client domain joining
@@ -76,9 +79,9 @@ Ethernet 2 is configured for the internal lab network:
 | Phase 3 | Domain controller setup | ✅ Complete |
 | Phase 4 | Active Directory structure | ✅ Complete |
 | Phase 5 | Users, groups, and OUs | ✅ Complete |
-| Phase 5.5 | Company branch design documentation | ⏳ Planned |
-| Phase 6 | Shared folders and permissions | 🚧 Current |
-| Phase 7 | Group Policy testing | ⏳ Planned |
+| Phase 5.5 | Company branch design documentation | ✅ Complete |
+| Phase 6 | Shared folders and permissions | ✅ Complete |
+| Phase 7 | Group Policy testing | ⏭️ Next |
 | Phase 8 | Windows 11 client domain join | ⏳ Planned |
 | Phase 9 | Branch structure expansion | ⏳ Planned |
 | Phase 10 | Bulk user import and PowerShell automation | ⏳ Planned |
@@ -129,14 +132,12 @@ The official documentation will describe the company model professionally, while
 
 ## 🔍 Planned Focus Areas
 
-- Shared folders and permissions
-- Share permissions vs NTFS permissions
-- Group-based access control
 - Group Policy testing
 - DNS basics
 - Windows 11 client domain joining
 - Client login testing
 - Mapped network drives
+- Shared folder access testing from a domain-joined client
 - File server setup
 - DHCP configuration
 - Firewall and routing concepts
@@ -166,31 +167,34 @@ Screenshots are being added throughout the project to document each major config
 
 Current screenshots include:
 
-- Windows Server VM setup
-- Server Manager configuration
-- VirtualBox VM configuration
-- Baseline snapshot creation
-- Domain login screen
-- AD DS and DNS installation confirmation
-- Domain controller Local Server details
-- Domain controller snapshot creation
-- Active Directory OU structure
-- Branch OU structure
-- Active Directory structure snapshot creation
-- Admin user creation
-- Standard user creation
-- Security group creation
-- User group membership example
-- Users and groups snapshot creation
+- `01 - Clean Install - Renamed Server.png`
+- `02 - VirtualBox VM Configuration.png`
+- `03 - Baseline Snapshot Created.png`
+- `04 - Domain Login Screen.png`
+- `05 - AD DS and DNS Installed.png`
+- `06 - Domain Controller Local Server.png`
+- `07 - Domain Controller Snapshot Created.png`
+- `08 - Active Directory OU Structure Created.png`
+- `09 - Branch OU Structure.png`
+- `10 - Active Directory Structure Snapshot Created.png`
+- `11 - Admin User Created.png`
+- `12 - Standard Users Created.png`
+- `13 - Security Groups Created.png`
+- `14 - User Group Membership Example.png`
+- `15 - Users and Groups Snapshot Created.png`
+- `16 - Shares Folder Created.png`
+- `17 - Public Folder NTFS Permissions.png`
+- `18 - Finance Folder NTFS Permissions.png`
+- `19 - HR Folder NTFS Permissions.png`
+- `20 - Public Shared Folder Group Members.png`
+- `21 - Finance Shared Folder Group Members.png`
+- `22 - HR Shared Folder Group Members.png`
+- `23 - Shared Folders Listed in Computer Management.png`
+- `24 - UNC Share Path Verification.png`
+- `25 - Shared Folders Snapshot Created.png`
 
 Planned screenshots include:
 
-- Shares folder creation
-- Public share permissions
-- Finance share permissions
-- HR share permissions
-- Shared folder security groups
-- Shared folders snapshot creation
 - Group Policy configuration
 - Group Policy results
 - Windows 11 client domain join
@@ -209,11 +213,11 @@ Current documentation includes:
 - `active-directory/domain-controller-setup.md`
 - `active-directory/active-directory-structure.md`
 - `active-directory/users-and-groups.md`
+- `company/branch-list.md`
+- `active-directory/shared-folders-and-permissions.md`
 
 Planned documentation includes:
 
-- `company/branch-list.md`
-- `active-directory/shared-folders-and-permissions.md`
 - `active-directory/group-policy-testing.md`
 - `client-setup/windows-11-domain-join.md`
 - `active-directory/branch-structure-expansion.md`
@@ -309,47 +313,54 @@ Current group memberships:
 
 | User | Group Membership |
 |---|---|
-| `janine.admin` | `GG_Admin_Staff` |
-| `ted.it` | `GG_IT_Staff`, `GG_Branch_Managers` |
-| `ozzy.security` | `GG_Operations_Staff`, `GG_Branch_Managers` |
-| `monty.operations` | `GG_Operations_Staff`, `GG_Branch_Managers` |
-| `chewy.hr` | `GG_HR_Staff`, `GG_Branch_Managers` |
-| `penny.executive` | `GG_Admin_Staff`, `GG_Branch_Managers` |
-| `daisy.sales` | `GG_Sales_Staff`, `GG_Branch_Managers` |
-| `porkchop.risk` | `GG_Operations_Staff`, `GG_Branch_Managers` |
+| `janine.admin` | `GG_Admin_Staff`, `GG_Shared_Public_Read`, `GG_Shared_Finance_RW`, `GG_Shared_HR_RW` |
+| `ted.it` | `GG_IT_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read` |
+| `ozzy.security` | `GG_Operations_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read` |
+| `monty.operations` | `GG_Operations_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read` |
+| `chewy.hr` | `GG_HR_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read`, `GG_Shared_HR_RW` |
+| `penny.executive` | `GG_Admin_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read`, `GG_Shared_Finance_RW` |
+| `daisy.sales` | `GG_Sales_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read` |
+| `porkchop.risk` | `GG_Operations_Staff`, `GG_Branch_Managers`, `GG_Shared_Public_Read` |
 | `svc.backup` | No normal staff group membership assigned |
 
-## 🗂️ Phase 6 Shared Folder Plan
+## 🗂️ Shared Folder Configuration
 
-Phase 6 will create shared folders and configure access using security groups.
+Phase 6 created shared folders and configured access using security groups.
 
-Planned folder paths:
+Folder paths:
 
 - `C:\Shares`
 - `C:\Shares\Public`
 - `C:\Shares\Finance`
 - `C:\Shares\HR`
 
-Planned share names:
+Share names:
 
 - `Public`
 - `Finance`
 - `HR`
 
-Planned access groups:
+UNC paths:
 
-| Folder | Security Group | Planned Access |
+- `\\LB-SRV-DC01\Public`
+- `\\LB-SRV-DC01\Finance`
+- `\\LB-SRV-DC01\HR`
+
+Access groups:
+
+| Folder | Security Group | Access |
 |---|---|---|
-| Public | `GG_Shared_Public_Read` | Read |
+| Public | `GG_Shared_Public_Read` | Read & Execute |
 | Finance | `GG_Shared_Finance_RW` | Modify |
 | HR | `GG_Shared_HR_RW` | Modify |
 
-Planned access model:
+Share permissions were configured as:
 
-- Public share: available to selected standard users and branch leads
-- Finance share: restricted to Head Office / Executive users
-- HR share: restricted to Head Office / HR users
-- Access should be assigned through groups instead of directly to users
+```text
+Authenticated Users → Full Control
+```
+
+NTFS permissions were used for the actual folder access control.
 
 ## ⚙️ Future Automation Plan
 
@@ -393,15 +404,22 @@ Current lessons learned:
 - Security groups make permissions easier to manage than assigning access directly to individual users.
 - Group memberships can be based on department, role, or access needs.
 - Shared-folder access groups can be created before the folders exist.
-- Clear screenshots and notes make the project easier to understand later.
+- Share permissions and NTFS permissions are separate permission systems.
+- Share permissions control access through the network share.
+- NTFS permissions control access to the actual folder and files.
+- When both share permissions and NTFS permissions apply, the most restrictive permission wins.
+- Keeping share permissions broad and NTFS permissions specific can make permissions easier to manage in a beginner lab.
+- Disabling inheritance allows folder permissions to be controlled more intentionally.
+- Removing generic `Users` permissions helps ensure access is controlled through dedicated security groups.
+- A Windows client VM will be needed to fully test domain logins, mapped drives, permissions, and Group Policy.
+- Hosting shared folders on the domain controller is acceptable for early lab practice, but a dedicated file server is more realistic for a production-style environment.
 - Planning the lab in phases helps keep the project organized and beginner-friendly.
 - It is useful to learn the manual Windows Server process before adding PowerShell automation.
-- A dedicated file server is more realistic than hosting all shares on a domain controller, but using the domain controller first is acceptable for early lab practice.
-- A Windows client VM will be needed to fully test domain logins, mapped drives, permissions, and Group Policy.
+- Clear screenshots and notes make the project easier to understand later.
 
 ## 🚧 Current Status
 
-Phase 1, Phase 2, Phase 3, Phase 4, and Phase 5 are complete.
+Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, Phase 5.5, and Phase 6 are complete.
 
 The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
 
@@ -411,8 +429,14 @@ A custom Active Directory OU structure has been created under the top-level `Lit
 
 Sample users, a service account, security groups, and group memberships have been created manually in Active Directory Users and Computers. Janine Admin represents Head Office, and each standard dog account represents a LittleBuilds branch lead.
 
-A Phase 5 snapshot has been created after completing user and group creation.
+A professional company branch model has been documented for future expansion. This includes planned branches for Winnipeg-HQ, Reykjavik-DR, Tokyo, London, Sydney, Paris, and New-York.
 
-The project roadmap has expanded to include shared folders, Group Policy, Windows client testing, branch expansion, bulk user import, a dedicated file server, DHCP, firewall/routing concepts, backup and disaster recovery, and optional advanced Windows Server services.
+Shared folders have been created on the domain controller under `C:\Shares`. The Public, Finance, and HR folders were shared and secured using share permissions, NTFS permissions, and Active Directory security groups.
 
-Next step: Phase 6 - Shared folders and permissions.
+The shares were verified in Computer Management and through the UNC path `\\LB-SRV-DC01`.
+
+A Phase 6 snapshot has been created after completing shared folder and permissions configuration.
+
+The project roadmap has expanded to include Group Policy, Windows client testing, branch expansion, bulk user import, a dedicated file server, DHCP, firewall/routing concepts, backup and disaster recovery, and optional advanced Windows Server services.
+
+Next step: Phase 7 - Group Policy testing.
