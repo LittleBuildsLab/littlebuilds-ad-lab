@@ -25,6 +25,7 @@ The lab starts with manual Windows Server and Active Directory configuration fir
 | Client OS | Windows 11 planned |
 | Lab Network | LittleBuildsLabNet |
 | Lab Type | Small business-style Active Directory environment |
+| Current Snapshot | 06 - Group Policy Testing Complete |
 
 ## 🌐 Network Configuration
 
@@ -58,7 +59,15 @@ Ethernet 2 is configured for the internal lab network:
 - NTFS permissions
 - Share permissions vs NTFS permissions
 - Group-based access control
-- Group Policy basics
+- Group Policy Management
+- Group Policy Object creation
+- GPO linking and OU targeting
+- Computer Configuration vs User Configuration
+- GPO inheritance basics
+- Legal notice policy testing
+- Control Panel restriction policy planning
+- `gpupdate /force`
+- `gpresult`
 - DNS fundamentals
 - Windows client domain joining
 - DHCP planning and configuration
@@ -81,8 +90,8 @@ Ethernet 2 is configured for the internal lab network:
 | Phase 5 | Users, groups, and OUs | ✅ Complete |
 | Phase 5.5 | Company branch design documentation | ✅ Complete |
 | Phase 6 | Shared folders and permissions | ✅ Complete |
-| Phase 7 | Group Policy testing | ⏭️ Next |
-| Phase 8 | Windows 11 client domain join | ⏳ Planned |
+| Phase 7 | Group Policy testing | ✅ Complete |
+| Phase 8 | Windows 11 client domain join | ⏭️ Next |
 | Phase 9 | Branch structure expansion | ⏳ Planned |
 | Phase 10 | Bulk user import and PowerShell automation | ⏳ Planned |
 | Phase 11 | Advanced groups and permissions | ⏳ Planned |
@@ -132,12 +141,12 @@ The official documentation will describe the company model professionally, while
 
 ## 🔍 Planned Focus Areas
 
-- Group Policy testing
-- DNS basics
 - Windows 11 client domain joining
 - Client login testing
+- Group Policy testing from a domain-joined workstation
 - Mapped network drives
 - Shared folder access testing from a domain-joined client
+- DNS basics
 - File server setup
 - DHCP configuration
 - Firewall and routing concepts
@@ -151,7 +160,7 @@ The official documentation will describe the company model professionally, while
 | System | Suggested Name | Purpose | Status |
 |---|---|---|---|
 | Domain Controller / DNS | LB-SRV-DC01 | Active Directory, DNS, users, groups, OUs, Group Policy | ✅ Built |
-| Windows 11 Client | LB-WIN11-CL01 | Domain login, permissions testing, GPO testing | ⏳ Planned |
+| Windows 11 Client | LB-WIN11-CL01 | Domain login, permissions testing, GPO testing | ⏭️ Next |
 | File Server | LB-SRV-FS01 | Dedicated shared folder hosting | ⏳ Planned |
 | DHCP Server | LB-SRV-DHCP01 | DHCP scopes, leases, reservations, client IP assignment | ⏳ Planned |
 | Firewall / Router VM | LB-FW-01 | Firewall rules, routing, NAT, network separation | ⏳ Planned |
@@ -192,13 +201,20 @@ Current screenshots include:
 - `23 - Shared Folders Listed in Computer Management.png`
 - `24 - UNC Share Path Verification.png`
 - `25 - Shared Folders Snapshot Created.png`
+- `26 - Legal Notice GPO Linked to Domain Controllers.png`
+- `27 - Group Policy Update Completed.png`
+- `28 - Group Policy Result Shows Legal Notice GPO.png`
+- `29 - Legal Notice Displayed at Sign-In.png`
+- `30 - Legal Notice GPO Settings Configured.png`
+- `31 - Control Panel Restriction GPO Linked to Standard Users.png`
+- `32 - Control Panel Restriction GPO Settings Configured.png`
+- `33 - Group Policy Testing Snapshot Created.png`
 
 Planned screenshots include:
 
-- Group Policy configuration
-- Group Policy results
 - Windows 11 client domain join
 - Client share access testing
+- Group Policy testing from Windows 11 client
 - Branch structure expansion
 - Bulk user import results
 - File server configuration
@@ -215,10 +231,10 @@ Current documentation includes:
 - `active-directory/users-and-groups.md`
 - `company/branch-list.md`
 - `active-directory/shared-folders-and-permissions.md`
+- `active-directory/group-policy-testing.md`
 
 Planned documentation includes:
 
-- `active-directory/group-policy-testing.md`
 - `client-setup/windows-11-domain-join.md`
 - `active-directory/branch-structure-expansion.md`
 - `automation/bulk-user-import.md`
@@ -356,11 +372,75 @@ Access groups:
 
 Share permissions were configured as:
 
-```text
-Authenticated Users → Full Control
-```
+    Authenticated Users → Full Control
 
 NTFS permissions were used for the actual folder access control.
+
+## 🧪 Current Group Policy Configuration
+
+Phase 7 introduced beginner Group Policy testing.
+
+Two Group Policy Objects were created manually in Group Policy Management.
+
+### GPO 1 - Legal Notice Test
+
+GPO name:
+
+- `LittleBuilds - Legal Notice Test`
+
+Purpose:
+
+- Displays a legal notice before sign-in.
+
+Configuration path:
+
+- `Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options`
+
+Settings configured:
+
+| Setting | Value |
+|---|---|
+| Interactive logon: Message title for users attempting to log on | `LittleBuilds Authorized Access Only` |
+| Interactive logon: Message text for users attempting to log on | `This system is part of the LittleBuilds Active Directory lab. Access is limited to authorized LittleBuilds users only. Activity may be monitored for training, testing, and troubleshooting purposes.` |
+
+Linked to:
+
+- `littlebuilds.local > Domain Controllers`
+
+Testing completed:
+
+- Ran `gpupdate /force`
+- Verified with `gpresult /scope computer /r`
+- Signed out and confirmed the legal notice appeared before login
+
+### GPO 2 - Control Panel Restriction Test
+
+GPO name:
+
+- `LittleBuilds - Control Panel Restriction Test`
+
+Purpose:
+
+- Restricts access to Control Panel and PC Settings for standard users.
+
+Configuration path:
+
+- `User Configuration > Policies > Administrative Templates > Control Panel`
+
+Setting configured:
+
+| Setting | Value |
+|---|---|
+| Prohibit access to Control Panel and PC settings | Enabled |
+
+Linked to:
+
+- `littlebuilds.local > LittleBuilds > Users > Standard-Users`
+
+Testing status:
+
+- Created, configured, linked, and documented
+- Full testing will be completed after a Windows 11 client is joined to the domain
 
 ## ⚙️ Future Automation Plan
 
@@ -416,10 +496,21 @@ Current lessons learned:
 - Planning the lab in phases helps keep the project organized and beginner-friendly.
 - It is useful to learn the manual Windows Server process before adding PowerShell automation.
 - Clear screenshots and notes make the project easier to understand later.
+- Group Policy Objects can be created separately before they are linked to an OU.
+- A GPO does not apply just because it exists; it must be linked to the correct domain or OU.
+- Computer Configuration settings apply to computers.
+- User Configuration settings apply to user accounts.
+- A legal notice is a beginner-friendly Computer Configuration policy because it can be visibly tested at sign-in.
+- User-based GPOs should be linked to the OU where the target users are located.
+- The Control Panel restriction GPO was linked to `Standard-Users` so administrator and service accounts are not restricted.
+- `gpupdate /force` refreshes Group Policy manually.
+- `gpresult` helps confirm which GPOs were applied.
+- Group Policy testing is easier to understand when screenshots show both the GPO link and the configured settings.
+- The Windows Server time zone should be correct because Active Directory and domain authentication depend on accurate time.
 
 ## 🚧 Current Status
 
-Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, Phase 5.5, and Phase 6 are complete.
+Phase 1, Phase 2, Phase 3, Phase 4, Phase 5, Phase 5.5, Phase 6, and Phase 7 are complete.
 
 The repository has been created, the Windows Server 2022 VM has been installed, the server has been renamed to `LB-SRV-DC01`, VirtualBox Guest Additions have been installed, and a clean baseline snapshot has been created.
 
@@ -435,8 +526,16 @@ Shared folders have been created on the domain controller under `C:\Shares`. The
 
 The shares were verified in Computer Management and through the UNC path `\\LB-SRV-DC01`.
 
-A Phase 6 snapshot has been created after completing shared folder and permissions configuration.
+Group Policy testing has been completed. A legal notice GPO was created, linked to the Domain Controllers OU, refreshed with `gpupdate /force`, verified with `gpresult`, and tested successfully at sign-in.
 
-The project roadmap has expanded to include Group Policy, Windows client testing, branch expansion, bulk user import, a dedicated file server, DHCP, firewall/routing concepts, backup and disaster recovery, and optional advanced Windows Server services.
+A Control Panel restriction GPO was also created and linked to the Standard-Users OU. This policy is ready for full testing after a Windows 11 client is joined to the domain.
 
-Next step: Phase 7 - Group Policy testing.
+A Phase 7 snapshot has been created after completing Group Policy testing.
+
+Current VirtualBox snapshot:
+
+- `06 - Group Policy Testing Complete`
+
+The project roadmap has expanded to include Windows client testing, branch expansion, bulk user import, a dedicated file server, DHCP, firewall/routing concepts, backup and disaster recovery, and optional advanced Windows Server services.
+
+Next step: Phase 8 - Windows 11 client domain join.
