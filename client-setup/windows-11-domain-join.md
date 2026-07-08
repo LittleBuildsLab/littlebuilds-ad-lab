@@ -363,6 +363,46 @@ After Phase 8 testing, final VirtualBox snapshots were created.
 
 `07 - Windows 11 Client Domain Join Complete`
 
+## Key Screenshots
+
+### Server IP Configuration Before Client Join
+
+![Server IP Configuration Before Client Join](../screenshots/34%20-%20Server%20IP%20Configuration%20Before%20Client%20Join.png)
+
+### Windows 11 Client Joined to Domain
+
+![Windows 11 Client Joined to littlebuilds.local Domain](../screenshots/51%20-%20Windows%2011%20Client%20Joined%20to%20littlebuilds.local%20Domain.png)
+
+### Domain User Login Verified
+
+![Windows 11 Domain User Login Verified](../screenshots/52%20-%20Windows%2011%20Domain%20User%20Login%20Verified.png)
+
+### Computer Object in Active Directory
+
+![Windows 11 Client Computer Object in ADUC](../screenshots/53%20-%20Windows%2011%20Client%20Computer%20Object%20in%20ADUC.png)
+
+### Computer Group Policy Result
+
+![Windows 11 Client gpresult Computer Policy](../screenshots/56%20-%20Windows%2011%20Client%20gpresult%20Computer%20Policy.png)
+
+### Standard User Control Panel GPO Applied
+
+![Windows 11 Standard User gpresult Shows Control Panel GPO](../screenshots/58%20-%20Windows%2011%20Standard%20User%20gpresult%20Shows%20Control%20Panel%20GPO.png)
+
+### Finance Share Access Denied for Standard User
+
+![Windows 11 Standard User Finance Share Access Denied](../screenshots/62%20-%20Windows%2011%20Standard%20User%20Finance%20Share%20Access%20Denied.png)
+
+### Finance Modify Permission Verified for Admin User
+
+![Windows 11 Admin User Finance Modify Permission Verified](../screenshots/66%20-%20Windows%2011%20Admin%20User%20Finance%20Modify%20Permission%20Verified.png)
+
+### Phase 8 Final Snapshots
+
+![Windows 11 Client Phase 8 Snapshot Created](../screenshots/67%20-%20Windows%2011%20Client%20Phase%208%20Snapshot%20Created.png)
+
+![Server Phase 8 Snapshot Created](../screenshots/68%20-%20Server%20Phase%208%20Snapshot%20Created.png)
+
 ## Screenshots
 
 Some screenshot numbers are skipped because certain planned or optional screenshots were not captured.
